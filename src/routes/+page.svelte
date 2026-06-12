@@ -557,7 +557,8 @@
 							STEP 2 — SYNC
 						</div>
 						<pre class="overflow-x-auto bg-carbon p-5 font-mono text-sm leading-relaxed text-paper"><span
-								class="text-amber">$</span> bash .son-of-anton/scripts/soa-sync.sh</pre>
+								class="text-amber">$</span> /soa update    <span class="text-line-soft"># canonical — fetch, merge, sync, verify</span>
+<span class="text-amber">$</span> bash .son-of-anton/scripts/soa-sync.sh    <span class="text-line-soft"># manual equivalent (sync only)</span></pre>
 						<p
 							class="border-t-2 border-carbon bg-paper-bright px-5 py-4 text-sm leading-relaxed text-ink-muted"
 						>
