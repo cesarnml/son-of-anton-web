@@ -186,12 +186,19 @@
 <div class="font-body antialiased">
 	<!-- ============ NAV ============ -->
 	<nav
-		class="sticky top-0 z-50 flex w-full items-center justify-between border-b-2 border-carbon bg-paper px-5 py-3 md:px-10"
+		class="sticky top-0 z-50 flex w-full items-center justify-between gap-6 border-b-2 border-carbon bg-paper px-5 py-3 md:px-10"
 	>
-		<a href="#top" class="font-mono text-xs font-bold tracking-[0.2em] uppercase">
-			Son of Anton<span class="text-cobalt">_</span>
+		<a href="#top" class="flex items-center gap-3 font-mono text-xs font-bold tracking-[0.2em] uppercase">
+			<img
+				src="/logo-64.webp"
+				alt=""
+				width="32"
+				height="32"
+				class="h-8 w-8 border-2 border-carbon"
+			/>
+			<span class="whitespace-nowrap">Son of Anton<span class="text-cobalt">_</span></span>
 		</a>
-		<div class="hidden items-center gap-1 font-mono text-sm md:flex">
+		<div class="hidden items-center gap-1 font-mono text-sm lg:flex">
 			<a href="#gates" class="px-2 py-1 transition-colors hover:bg-cobalt hover:text-white"
 				>GATES</a
 			>
@@ -208,13 +215,13 @@
 		<div class="flex items-center gap-3">
 			<a
 				href={GITHUB}
-				class="border-2 border-carbon bg-paper px-3 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-carbon hover:text-paper"
+				class="border-2 border-carbon bg-paper px-3 py-2 font-mono text-xs font-bold tracking-wider whitespace-nowrap uppercase transition-colors hover:bg-carbon hover:text-paper"
 			>
 				GitHub ↗
 			</a>
 			<a
 				href="#install"
-				class="hidden border-2 border-cobalt bg-cobalt px-3 py-2 font-mono text-xs font-bold tracking-wider text-white uppercase transition-colors hover:bg-paper hover:text-cobalt sm:block"
+				class="hidden border-2 border-cobalt bg-cobalt px-3 py-2 font-mono text-xs font-bold tracking-wider whitespace-nowrap text-white uppercase transition-colors hover:bg-paper hover:text-cobalt sm:block"
 			>
 				/soa plan
 			</a>
@@ -230,7 +237,7 @@
 						A delivery orchestrator for solo developers &amp; small teams
 					</p>
 					<h1
-						class="font-display mb-8 text-5xl leading-[1.02] font-extrabold tracking-tight md:text-7xl"
+						class="font-display mb-8 text-4xl leading-[1.02] font-extrabold tracking-tight sm:text-5xl md:text-7xl"
 					>
 						AI should do the implementation.<br />
 						<span class="text-cobalt">You should own the decisions.</span>
