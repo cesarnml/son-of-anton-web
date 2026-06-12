@@ -3,7 +3,6 @@
 	import '@fontsource-variable/inter';
 	import '@fontsource-variable/jetbrains-mono';
 	import './layout.css';
-	import favicon from '$lib/assets/favicon.svg';
 	import newsreaderWoff2 from '@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2?url';
 	import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 	import jetbrainsWoff2 from '@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url';
@@ -12,7 +11,9 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+	<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 	<link rel="preload" href={newsreaderWoff2} as="font" type="font/woff2" crossorigin="anonymous" />
 	<link rel="preload" href={interWoff2} as="font" type="font/woff2" crossorigin="anonymous" />
 	<link rel="preload" href={jetbrainsWoff2} as="font" type="font/woff2" crossorigin="anonymous" />

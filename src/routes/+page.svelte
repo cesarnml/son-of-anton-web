@@ -140,11 +140,47 @@
 		name="description"
 		content="Son of Anton is a delivery orchestrator for solo developers and small teams. Three human gates — plan, decompose, closeout — and the orchestrator owns everything in between. Runs on Codex, Cursor, Copilot, Claude, or any agent that reads AGENTS.md."
 	/>
-	<meta property="og:title" content="Son of Anton" />
+	<link rel="canonical" href="https://sonofanton.vercel.app/" />
+	<meta name="theme-color" content="#f5f4f1" />
+
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="Son of Anton" />
+	<meta property="og:url" content="https://sonofanton.vercel.app/" />
+	<meta property="og:title" content="Son of Anton — A delivery orchestrator with human decision gates" />
 	<meta
 		property="og:description"
+		content="AI should do the implementation. You should own the decisions. Three human gates; the orchestrator owns everything in between."
+	/>
+	<meta property="og:image" content="https://sonofanton.vercel.app/og.webp" />
+	<meta property="og:image:type" content="image/webp" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="776" />
+	<meta
+		property="og:image:alt"
+		content="Son of Anton — AI-agent agnostic, structured delivery orchestrator"
+	/>
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Son of Anton — A delivery orchestrator with human decision gates" />
+	<meta
+		name="twitter:description"
 		content="AI should do the implementation. You should own the decisions."
 	/>
+	<meta name="twitter:image" content="https://sonofanton.vercel.app/og.webp" />
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'SoftwareApplication',
+		name: 'Son of Anton',
+		applicationCategory: 'DeveloperApplication',
+		operatingSystem: 'macOS, Linux',
+		description:
+			'A delivery orchestrator for solo developers and small teams. Three human decision gates — plan, decompose, closeout — and the orchestrator owns everything in between.',
+		url: 'https://sonofanton.vercel.app/',
+		image: 'https://sonofanton.vercel.app/og.webp',
+		offers: { '@type': 'Offer', price: '0' },
+		sameAs: ['https://github.com/cesarnml/son-of-anton']
+	})}</script>`}
 </svelte:head>
 
 <div class="font-body antialiased">
