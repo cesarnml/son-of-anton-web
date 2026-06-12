@@ -7,6 +7,9 @@ export default defineConfig({
 	plugins: [
 		tailwindcss(),
 		sveltekit({
+			// Single-page site with ~5KB of CSS: inlining it removes every
+			// render-blocking stylesheet request
+			inlineStyleThreshold: 1024 * 100,
 			compilerOptions: {
 				// Force runes mode for the project, except for libraries. Can be removed in svelte 6.
 				runes: ({ filename }) => filename.split(/[/\\]/).includes('node_modules') ? undefined : true

@@ -10,9 +10,9 @@
 	--color-ink-muted: #4e4d4d;
 	--color-line-soft: #c9c7c2;
 
-	--font-display: 'Newsreader', Georgia, serif;
-	--font-body: 'Inter', system-ui, sans-serif;
-	--font-mono: 'JetBrains Mono', ui-monospace, monospace;
+	--font-display: 'Newsreader Variable', Georgia, serif;
+	--font-body: 'Inter Variable', system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
 }
 
 html {

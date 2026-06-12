@@ -632,7 +632,7 @@
 				class="text-line-soft uppercase transition-colors hover:text-amber">License</a
 			>
 		</div>
-		<div class="font-mono text-xs font-bold tracking-[0.2em] text-cobalt">SOA_CORE</div>
+		<div class="font-mono text-xs font-bold tracking-[0.2em] text-[#a5bdff]">SOA_CORE</div>
 	</footer>
 </div>
 
