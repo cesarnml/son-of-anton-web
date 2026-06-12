@@ -616,8 +616,13 @@
 			<a href={GITHUB} class="text-line-soft uppercase transition-colors hover:text-amber"
 				>GitHub</a
 			>
-			<a href="{GITHUB}#install" class="text-line-soft uppercase transition-colors hover:text-amber"
-				>Docs</a
+			<a
+				href="{GITHUB}/blob/main/docs/how-son-of-anton-works.md"
+				class="text-line-soft uppercase transition-colors hover:text-amber">How it works</a
+			>
+			<a
+				href="{GITHUB}/blob/main/CONTRIBUTING.md"
+				class="text-line-soft uppercase transition-colors hover:text-amber">Contributing</a
 			>
 			<a href={CODOGOTCHI} class="text-line-soft uppercase transition-colors hover:text-amber"
 				>Codogotchi</a
