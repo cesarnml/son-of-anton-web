@@ -1,8 +1,10 @@
-# son-of-anton-web
+# Son of Anton Marketing Site
 
 The marketing site for [Son of Anton](https://github.com/cesarnml/son-of-anton), a delivery orchestrator for solo developers and small teams.
 
 **Live:** [sonofanton.vercel.app](https://sonofanton.vercel.app)
+
+<a href="https://www.producthunt.com/products/son-of-anton?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-son-of-anton" target="_blank" rel="noopener noreferrer"><img alt="Son of Anton - AI should do the implementation. You own the decisions. | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1170722&amp;theme=light&amp;t=1781650919599"></a>
 
 ## Why a separate repo
 
