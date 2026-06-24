@@ -4,43 +4,46 @@
 	const INSTALL_CMD =
 		'git subtree add --prefix .son-of-anton https://github.com/cesarnml/son-of-anton.git main --squash';
 
-	// Gate names from tools/delivery/codogotchi-gate.ts — the actual events the
-	// orchestrator writes to ~/.codogotchi/gate.json
-	const gateEvents = [
-		'ticket_started',
-		'red_tdd',
-		'green_tdd',
-		'adversarial_review',
-		'open_pr',
-		'poll_review',
-		'record_review',
-		'review_clean',
-		'ticket_completed'
+	// The ten SoA gate states, in the exact lifecycle order codogotchi paints them.
+	// Mirrors CodogotchiPet.soaRowMap (apps/menubar/Sources/CodogotchiPet.swift):
+	// each row of the real codogotchi-soa-spritesheet.webp (8 frames × 10 rows,
+	// 192×208 px cells) is one gate. `label` is the pet's displayLabel from
+	// ActivityState.swift. `row` is the sprite-sheet row index the renderer slices.
+	const gateStates = [
+		{ id: 'ticket_started', label: 'Ticket Start', row: 0 },
+		{ id: 'red_tdd', label: 'Red TDD', row: 1 },
+		{ id: 'green_tdd', label: 'Green TDD', row: 2 },
+		{ id: 'adversarial_review', label: 'Adv Review', row: 3 },
+		{ id: 'open_pr', label: 'Open PR', row: 4 },
+		{ id: 'poll_review', label: 'Polling', row: 5 },
+		{ id: 'review_clean', label: 'Review Clean', row: 6 },
+		{ id: 'record_review', label: 'Recording', row: 7 },
+		{ id: 'advance', label: 'Advancing', row: 8 },
+		{ id: 'ticket_completed', label: 'Ticket Done', row: 9 }
 	];
 
-	const petFaces: Record<string, string> = {
-		ticket_started: '(o_o)',
-		red_tdd: '(>_<)',
-		green_tdd: '(^_^)',
-		adversarial_review: '(¬_¬)',
-		open_pr: '(o_O)/',
-		poll_review: '(._.)zZ',
-		record_review: '(=_=)',
-		review_clean: '\\(^o^)/',
-		ticket_completed: '(^‿^)'
-	};
+	// Sprite-sheet geometry + timing, copied from CodogotchiPet.swift:
+	// 8 frames per loop, 1.5 s / 8 = 187.5 ms per frame, 192×208 source cells.
+	const SHEET_COLS = 8;
+	const SHEET_ROWS = 10;
+	const FRAME_MS = 1500 / SHEET_COLS;
+	// Display the 192×208 cell at this width; height keeps the source aspect ratio.
+	const CELL_W = 132;
+	const CELL_H = Math.round((CELL_W * 208) / 192);
 
 	let gateIndex = $state(0);
 	let copied = $state(false);
 
 	$effect(() => {
 		const id = setInterval(() => {
-			gateIndex = (gateIndex + 1) % gateEvents.length;
-		}, 2200);
+			gateIndex = (gateIndex + 1) % gateStates.length;
+		}, 2400);
 		return () => clearInterval(id);
 	});
 
-	const currentGate = $derived(gateEvents[gateIndex]);
+	const currentGate = $derived(gateStates[gateIndex]);
+	// background-position-y that selects the current gate's row on the sheet.
+	const spriteRowOffset = $derived(-currentGate.row * CELL_H);
 
 	async function copyInstall() {
 		await navigator.clipboard.writeText(INSTALL_CMD);
@@ -469,9 +472,9 @@
 						acts it out on your menu bar.
 					</p>
 					<p class="mb-8 max-w-xl leading-relaxed text-ink-muted">
-						Red TDD, green TDD, adversarial review, PR opened, review clean: nine gate events, each
-						with its own mood. Best-effort and local-only — a write failure never aborts a delivery
-						command, and you can switch it off with one line of config.
+						Red TDD, green TDD, adversarial review, PR opened, review clean: ten gate events, each
+						an eight-frame animation your pet acts out. Best-effort and local-only — a write failure
+						never aborts a delivery command, and you can switch it off with one line of config.
 					</p>
 					<div class="flex flex-wrap gap-4">
 						<a
@@ -486,30 +489,56 @@
 					</div>
 				</div>
 
-				<!-- Live gate.json readout -->
+				<!-- Live gate.json readout — real codogotchi sprite, animated per gate -->
 				<div class="lg:col-span-5 lg:col-start-8">
 					<div class="border-2 border-carbon bg-carbon p-6 font-mono text-sm text-paper md:p-8">
 						<div class="mb-5 flex items-center justify-between border-b border-ink-muted pb-3">
 							<span class="text-xs tracking-[0.15em] text-amber">~/.codogotchi/gate.json</span>
 							<span class="text-xs text-line-soft">TTL 180s</span>
 						</div>
-						<pre class="leading-relaxed whitespace-pre-wrap">{`{
-  "gate": "`}<span class="bg-amber px-1 font-bold text-carbon">{currentGate}</span>{`",
-  "plan_key": "phase-N",
-  "ticket_id": "pN-04"
+						<div class="flex items-center gap-5">
+							<!-- The actual codogotchi pet, sliced live from the SoA sprite sheet -->
+							<div
+								class="shrink-0 border border-ink-muted bg-black"
+								style="
+									--sheet-w: {CELL_W * SHEET_COLS}px;
+									width: {CELL_W}px;
+									height: {CELL_H}px;
+									background-image: url('/codogotchi-soa-spritesheet.webp');
+									background-repeat: no-repeat;
+									background-size: {CELL_W * SHEET_COLS}px {CELL_H * SHEET_ROWS}px;
+									background-position-y: {spriteRowOffset}px;
+									animation: sprite-walk {FRAME_MS * SHEET_COLS}ms steps({SHEET_COLS}) infinite;
+								"
+								role="img"
+								aria-label="Codogotchi pet animating the {currentGate.label} gate"
+							></div>
+							<div class="min-w-0 flex-1">
+								<pre class="leading-relaxed whitespace-pre-wrap">{`{
+ "gate":
+  "`}<span class="bg-amber px-1 font-bold text-carbon">{currentGate.id}</span>{`",
+ "ticket": "pN-04"
 }`}</pre>
-						<div class="mt-6 flex items-center justify-between border-t border-ink-muted pt-4">
-							<span class="text-2xl text-amber" aria-hidden="true">{petFaces[currentGate]}</span>
-							<span class="text-xs tracking-[0.15em] text-line-soft uppercase"
-								>PET STATUS: REACTING</span
-							>
+							</div>
+						</div>
+						<div
+							class="mt-6 flex items-center justify-between border-t border-ink-muted pt-4 text-xs"
+						>
+							<span class="flex items-center gap-2">
+								<span class="tracking-[0.15em] text-line-soft uppercase">Pet</span>
+								<span class="bg-amber px-1.5 py-0.5 font-bold text-carbon">{currentGate.label}</span>
+							</span>
+							<span class="flex items-center gap-3">
+								<span class="text-rose-500" aria-label="3 of 3 hearts">♥♥♥</span>
+								<span class="tracking-[0.15em] text-emerald-400 uppercase">Thriving</span>
+							</span>
 						</div>
 					</div>
 					<div
 						class="flex justify-between border-2 border-t-0 border-carbon bg-paper px-4 py-2 font-mono text-xs"
 					>
 						<span>FIG. 02 — GATE EVENT FEED</span>
-						<span class="text-cobalt">{gateIndex + 1}/{gateEvents.length}</span>
+						<span class="text-cobalt">{gateIndex + 1}/{gateStates.length}</span>
 					</div>
 				</div>
 			</div>
@@ -686,5 +715,23 @@
 	}
 	.hide-scrollbar::-webkit-scrollbar {
 		display: none;
+	}
+
+	/* Walk the 8 frames of the current sprite row. Only background-position-x is
+	   animated; background-position-y (the gate row) is set inline per state.
+	   steps(8) holds each of the 8 frames; the -100% end is never displayed. */
+	@keyframes sprite-walk {
+		from {
+			background-position-x: 0;
+		}
+		to {
+			background-position-x: calc(-1 * var(--sheet-w));
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		[style*='sprite-walk'] {
+			animation: none !important;
+		}
 	}
 </style>

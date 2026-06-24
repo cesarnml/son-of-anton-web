@@ -3,8 +3,8 @@
 	"configurations": [
 		{
 			"name": "dev",
-			"runtimeExecutable": "pnpm",
-			"runtimeArgs": ["run", "dev", "--port", "5173"],
+			"runtimeExecutable": "./node_modules/.bin/vite",
+			"runtimeArgs": ["dev", "--port", "5173"],
 			"port": 5173
 		}
 	]
